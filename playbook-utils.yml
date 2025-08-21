@@ -63,5 +63,10 @@
         name: kdeconnect
         state: present
 
+    - name: Install Brave Browser
+      ansible.builtin.shell: curl -fsS https://dl.brave.com/install.sh | sh
+      args:
+        warn: false
+    
     
         
