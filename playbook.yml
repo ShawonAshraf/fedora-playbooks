@@ -3,3 +3,4 @@
 - import_playbook: playbook-utils.yml
 - import_playbook: playbook-devtools.yml
 - import_playbook: playbook-flatpaks.yml
+- import_playbook: playbook-media.yml

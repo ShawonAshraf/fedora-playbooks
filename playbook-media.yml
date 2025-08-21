@@ -1,0 +1,21 @@
+---
+- hosts: all
+  become: true
+  tasks:
+    - name: Add multimedia libraries
+      command: dnf group install multimedia -y
+
+    - name: Install VLC
+      dnf:
+        name: vlc
+        state: present
+
+    - name: Install MPV
+      dnf:
+        name: mpv
+        state: present
+        
+    - name: Install Handbrake
+      dnf:
+        name: handbrake
+        state: present
