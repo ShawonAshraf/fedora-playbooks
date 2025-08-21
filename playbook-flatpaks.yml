@@ -1,0 +1,48 @@
+---
+- hosts: all
+  become: false
+  tasks:
+    - name: Install flatpak
+      dnf:
+        name: flatpak
+        state: present
+
+    - name: Enable Flathub remote
+      command: flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+      changed_when: false
+
+    - name: Install Discord
+      command: flatpak install -y flathub com.discordapp.Discord
+
+    - name: Install Spotify
+      command: flatpak install -y flathub com.spotify.Client
+ 
+    - name: Install Signal
+      command: flatpak install -y flathub org.signal.Signal
+    
+    - name: Install Telegram
+      command: flatpak install -y flathub org.telegram.desktop
+
+  
+    - name: Install flatseal
+      command: flatpak install flathub com.github.tchx84.Flatseal -y
+
+    - name: Install OBS Studio
+      command: flatpak install flathub com.obsproject.Studio -y
+
+    - name: Install Obsidian
+      command: flatpak install flathub md.obsidian.Obsidian -y
+    
+    - name: Install Extension Manager
+      command: flatpak install flathub com.mattjakeman.ExtensionManager -y
+
+    - name: Install Pika Backup
+      command: flatpak install flathub org.gnome.World.PikaBackup -y
+
+    - name: Install Filezilla
+      command: flatpak install flathub org.filezillaproject.Filezilla -y
+
+    - name: Install Podman Desktop
+      command: flatpak install flathub io.podman_desktop.PodmanDesktop -y
+      
+      
