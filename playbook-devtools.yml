@@ -7,8 +7,6 @@
       dnf:
         name:
           - git
-          - gcc
-          - gcc-c++
           - clang
           - llvm
           - make
@@ -24,7 +22,6 @@
           - libffi-devel
           - patch
           - python3-devel
-          - python3-pip
         state: present
 
     - name: Add Docker repository
