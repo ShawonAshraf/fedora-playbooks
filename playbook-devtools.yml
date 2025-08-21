@@ -32,57 +32,6 @@
           - python3-pip
         state: present
 
-    - name: Install Rust and Cargo
-      shell: |
-        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-        source $HOME/.cargo/env
-      args:
-        creates: "{{ ansible_env.HOME }}/.cargo/bin/rustc"
-      become: false
-
-    - name: Install pyenv
-      shell: |
-        curl https://pyenv.run | bash
-      args:
-        creates: "{{ ansible_env.HOME }}/.pyenv/bin/pyenv"
-      become: false
-
-    - name: Configure shell for pyenv
-      blockinfile:
-        path: "{{ ansible_env.HOME }}/.bashrc"
-        block: |
-          export PYENV_ROOT="$HOME/.pyenv"
-          export PATH="$PYENV_ROOT/bin:$PATH"
-          eval "$(pyenv init --path)"
-          eval "$(pyenv init -)"
-          export PATH="$HOME/.cargo/bin:$PATH"
-        marker: "# {mark} ANSIBLE MANAGED BLOCK - dev tools"
-        create: true
-      become: false
-
-    - name: Install uv
-      shell: |
-        curl -LsSf https://astral.sh/uv/install.sh | sh
-      args:
-        creates: "{{ ansible_env.HOME }}/.cargo/bin/uv"
-      become: false
-
-    - name: Install Poetry
-      shell: |
-        curl -sSL https://install.python-poetry.org | python3 -
-      args:
-        creates: "{{ ansible_env.HOME }}/.local/bin/poetry"
-      become: false
-
-    - name: Add Poetry to PATH
-      blockinfile:
-        path: "{{ ansible_env.HOME }}/.bashrc"
-        block: |
-          export PATH="$HOME/.local/bin:$PATH"
-        marker: "# {mark} ANSIBLE MANAGED BLOCK - poetry"
-        create: true
-      become: false
-
     - name: Add Docker repository
       yum_repository:
         name: docker-ce-stable
@@ -118,3 +67,51 @@
       dnf:
         name: podman-compose
         state: present
+
+- hosts: all
+  become: false
+  tasks:
+    - name: Install Rust and Cargo
+      shell: |
+        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+        source $HOME/.cargo/env
+      args:
+        creates: "{{ ansible_env.HOME }}/.cargo/bin/rustc"
+
+    - name: Install pyenv
+      shell: |
+        curl https://pyenv.run | bash
+      args:
+        creates: "{{ ansible_env.HOME }}/.pyenv/bin/pyenv"
+
+    - name: Configure shell for pyenv
+      blockinfile:
+        path: "{{ ansible_env.HOME }}/.bashrc"
+        block: |
+          export PYENV_ROOT="$HOME/.pyenv"
+          export PATH="$PYENV_ROOT/bin:$PATH"
+          eval "$(pyenv init --path)"
+          eval "$(pyenv init -)"
+          export PATH="$HOME/.cargo/bin:$PATH"
+        marker: "# {mark} ANSIBLE MANAGED BLOCK - dev tools"
+        create: true
+
+    - name: Install uv
+      shell: |
+        curl -LsSf https://astral.sh/uv/install.sh | sh
+      args:
+        creates: "{{ ansible_env.HOME }}/.cargo/bin/uv"
+
+    - name: Install Poetry
+      shell: |
+        curl -sSL https://install.python-poetry.org | python3 -
+      args:
+        creates: "{{ ansible_env.HOME }}/.local/bin/poetry"
+
+    - name: Add Poetry to PATH
+      blockinfile:
+        path: "{{ ansible_env.HOME }}/.bashrc"
+        block: |
+          export PATH="$HOME/.local/bin:$PATH"
+        marker: "# {mark} ANSIBLE MANAGED BLOCK - poetry"
+        create: true
