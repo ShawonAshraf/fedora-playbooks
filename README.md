@@ -1,4 +1,4 @@
-# fedora-playbacks
+# fedora-playbooks
 
 Fedora post installation steps automated with ansible. 
 
