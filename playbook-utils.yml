@@ -27,4 +27,20 @@
       dnf:
         name: tree
         state: present
+
+    - name: Install fastfetch
+      dnf:
+        name: fastfetch
+        state: present
+
+    - name: Enable varlad/onefetch copr repository
+      ansible.builtin.command: dnf copr enable -y varlad/onefetch
+      register: copr_result
+      changed_when: "'Repository successfully enabled.' in copr_result.stdout"
+
+    - name: Install onefetch
+      ansible.builtin.dnf:
+        name: onefetch
+        state: present
+    
         
