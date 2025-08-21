@@ -21,8 +21,10 @@
     - name: Install dnf-plugins-core
       command: dnf install -y dnf-plugins-core
   tasks:
-    - name: Add rpm-fusion
-      command: dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+    - name: Add rpm-fusion-free
+      command: dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
+    - name: Add rpm-fusion-nonfree
+      command: dnf install https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
     - name: Enable H.264
       command: dnf config-manager setopt fedora-cisco-openh264.enabled=1
     - name: Install akmod-nvidia
