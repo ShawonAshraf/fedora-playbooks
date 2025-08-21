@@ -2,7 +2,7 @@
 - hosts: localhost
   become: true
   tasks:
-    - name: Install tools
+    - name: Install tlp, htop, btop
       dnf:
         name:
           - tlp
@@ -17,3 +17,14 @@
           - tuned
           - tuned-ppd
         state: absent
+
+    - name: Install xclip
+      dnf:
+        name: xclip
+        state: present
+    
+    - name: Install tree
+      dnf:
+        name: tree
+        state: present
+        
