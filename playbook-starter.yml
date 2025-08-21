@@ -1,0 +1,45 @@
+---
+- hosts: all
+  become: true
+  pre_tasks:
+    - name: Install python3-dnf
+      raw: dnf install -y python3-dnf
+      register: result
+      changed_when: "'Nothing to do.' not in result.stdout"
+    - name: Tweak dnf
+      blockinfile:
+        path: /etc/dnf/dnf.conf
+        block: |
+          fastestmirror=True
+          max_parallel_downloads=20 
+          defaultyes=True
+        marker: "# {mark} ANSIBLE MANAGED BLOCK"
+    - name: Update system
+      command: dnf update -y
+    - name: Install dnf-utils
+      command: dnf install -y dnf-utils
+    - name: Install dnf-plugins-core
+      command: dnf install -y dnf-plugins-core
+  tasks:
+    - name: Add rpm-fusion
+      command: dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+    - name: Enable H.264
+      command: dnf config-manager setopt fedora-cisco-openh264.enabled=1
+    - name: Install akmod-nvidia
+      dnf:
+        name: akmod-nvidia
+        state: present
+    - name: Setup CUDA Toolkit
+      command: |
+       dnf config-manager addrepo --from-repofile=https://developer.download.nvidia.com/compute/cuda/repos/fedora41/$(uname -m)/cuda-fedora41.repo
+       dnf clean all
+       dnf module disable nvidia-driver
+       dnf config-manager setopt cuda-fedora41-$(uname -m).exclude=nvidia-driver,nvidia-modprobe,nvidia-persistenced,nvidia-settings,nvidia-libXNVCtrl,nvidia-xconfig
+       dnf -y install cuda-toolkit
+    - name: Run OS-Prober
+      command: os-prober
+    - name: Update grub entries
+      command: grub2-mkconfig -o /etc/grub2-efi.cfg
+
+    
+      

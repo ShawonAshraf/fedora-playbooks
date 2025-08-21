@@ -1,12 +1,7 @@
 ---
 - hosts: all
   become: true
-  pre_tasks:
-    - name: Install python3-dnf
-      raw: dnf install -y python3-dnf
-      register: result
-      changed_when: "'Nothing to do.' not in result.stdout"
-
+  
   tasks:
     - name: Install system development packages
       dnf:
