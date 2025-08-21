@@ -42,5 +42,15 @@
       ansible.builtin.dnf:
         name: onefetch
         state: present
+
+    - name: Install wget
+      ansible.builtin.dnf:
+        name: wget
+        state: present
+
+    - name: Install OpenBangla Keyboard
+      ansible.builtin.shell: bash -c "$(wget -q https://raw.githubusercontent.com/OpenBangla/OpenBangla-Keyboard/master/tools/install.sh -O -)"
+      args:
+        warn: false
     
         
