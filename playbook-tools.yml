@@ -1,0 +1,19 @@
+---
+- hosts: localhost
+  become: true
+  tasks:
+    - name: Install tools
+      dnf:
+        name:
+          - tlp
+          - tlp-rdw
+          - htop
+          - btop
+        state: present
+
+    - name: Remove tuned to prevent conflicts with tlp
+      dnf:
+        name:
+          - tuned
+          - tuned-ppd
+        state: absent
