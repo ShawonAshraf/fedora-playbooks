@@ -59,5 +59,8 @@
 
     - name: Install Tor Browser
       command: flatpak install flathub org.torproject.torbrowser-launcher -y
+      
+    - name: Install Zotero
+      command: flatpak install flathub org.zotero.Zotero -y
 
     
