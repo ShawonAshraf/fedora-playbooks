@@ -57,5 +57,11 @@
       shell: bash -c "$(wget -q https://raw.githubusercontent.com/OpenBangla/OpenBangla-Keyboard/master/tools/install.sh -O -)"
       args:
         warn: false
+
+    - name: Install KDE Connect
+      dnf:
+        name: kdeconnect
+        state: present
+
     
         
