@@ -45,4 +45,19 @@
     - name: Install Podman Desktop
       command: flatpak install flathub io.podman_desktop.PodmanDesktop -y
       
-      
+    - name: Install PDF Arranger
+      command: flatpak install flathub com.github.jeromerobert.pdfarranger -y
+
+    - name: Install Shortwave
+      command: flatpak install flathub de.haeckerfelix.Shortwave -y
+
+    - name: Install Anydesk
+      command: flatpak install flathub com.anydesk.Anydesk -y
+
+    - name: Install Localsend
+      command: flatpak install flathub org.localsend.localsend_app -y
+
+    - name: Install Tor Browser
+      command: flatpak install flathub org.torproject.torbrowser-launcher -y
+
+    
