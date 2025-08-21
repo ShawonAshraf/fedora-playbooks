@@ -2,6 +2,10 @@
 - hosts: all
   become: true
   tasks:
+    - name: Install gnome-tweak-tool
+      dnf:
+        name: gnome-tweak-tool
+        state: present
     - name: Install tlp, htop, btop
       dnf:
         name:
@@ -34,22 +38,22 @@
         state: present
 
     - name: Enable varlad/onefetch copr repository
-      ansible.builtin.command: dnf copr enable -y varlad/onefetch
+      command: dnf copr enable -y varlad/onefetch
       register: copr_result
       changed_when: "'Repository successfully enabled.' in copr_result.stdout"
 
     - name: Install onefetch
-      ansible.builtin.dnf:
+      dnf:
         name: onefetch
         state: present
 
     - name: Install wget
-      ansible.builtin.dnf:
+      dnf:
         name: wget
         state: present
 
     - name: Install OpenBangla Keyboard
-      ansible.builtin.shell: bash -c "$(wget -q https://raw.githubusercontent.com/OpenBangla/OpenBangla-Keyboard/master/tools/install.sh -O -)"
+      shell: bash -c "$(wget -q https://raw.githubusercontent.com/OpenBangla/OpenBangla-Keyboard/master/tools/install.sh -O -)"
       args:
         warn: false
     
