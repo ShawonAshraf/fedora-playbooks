@@ -1,7 +1,11 @@
 ---
 - import_playbook: playbook-starter.yml
+- import_playbook: playbook-nvidia.yml
 - import_playbook: playbook-utils.yml
 - import_playbook: playbook-devtools.yml
 - import_playbook: playbook-flatpaks.yml
 - import_playbook: playbook-media.yml
 - import_playbook: playbook-gaming.yml
+- import_playbook: playbook-brave.yml
+- import_playbook: playbook-cursor.yml
+- import_playbook: playbook-openbangla.yml
