@@ -60,7 +60,7 @@
 
     - name: Install KDE Connect
       dnf:
-        name: kdeconnect
+        name: kde-connect
         state: present
 
     - name: Install Brave Browser
