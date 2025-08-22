@@ -14,7 +14,3 @@
        dnf module disable nvidia-driver
        dnf config-manager setopt cuda-fedora41-$(uname -m).exclude=nvidia-driver,nvidia-modprobe,nvidia-persistenced,nvidia-settings,nvidia-libXNVCtrl,nvidia-xconfig
        dnf -y install cuda-toolkit
-    - name: Run OS-Prober
-      command: os-prober
-    - name: Update grub entries
-      command: grub2-mkconfig -o /etc/grub2-efi.cfg
