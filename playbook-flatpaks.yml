@@ -24,6 +24,7 @@
       - org.zotero.Zotero
       - org.mozilla.Thunderbird
       - net.davidotek.pupgui2
+      - com.github.d4nj1.tlpui
 
   tasks:
     - name: Add Flathub remote for user
