@@ -1,6 +1,8 @@
 ---
 - hosts: all
   become: true
+  vars:
+    target_user: shawon
   
   tasks:
     - name: Install system development packages
@@ -51,7 +53,7 @@
 
     - name: Add user to docker group
       user:
-        name: "{{ ansible_user }}"
+        name: "{{ target_user }}"
         groups: docker
         append: true
 
@@ -59,11 +61,18 @@
       dnf:
         name: podman-compose
         state: present
+
     - name: Install gh cli
+      dnf:
+        name: gh
+        state: present
+
+    - name: Install VSCode
       command: |
-        dnf install dnf5-plugins
-        dnf config-manager addrepo --from-repofile=https://cli.github.com/packages/rpm/gh-cli.repo
-        dnf install gh --repo gh-cli
+        rpm --import https://packages.microsoft.com/keys/microsoft.asc
+        echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\nautorefresh=1\ntype=rpm-md\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" | sudo tee /etc/yum.repos.d/vscode.repo > /dev/null
+        dnf check-update
+        dnf install code -y
 
 - hosts: all
   become: false
@@ -73,17 +82,17 @@
         curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
         source $HOME/.cargo/env
       args:
-        creates: "{{ ansible_env.HOME }}/.cargo/bin/rustc"
+        creates: "/home/{{ target_user }}/.cargo/bin/rustc"
 
     - name: Install pyenv
       shell: |
         curl https://pyenv.run | bash
       args:
-        creates: "{{ ansible_env.HOME }}/.pyenv/bin/pyenv"
+        creates: "/home/{{ target_user }}/.pyenv/bin/pyenv"
 
     - name: Configure shell for pyenv
       blockinfile:
-        path: "{{ ansible_env.HOME }}/.bashrc"
+        path: "/home/{{ target_user }}/.bashrc"
         block: |
           export PYENV_ROOT="$HOME/.pyenv"
           export PATH="$PYENV_ROOT/bin:$PATH"
@@ -97,25 +106,19 @@
       shell: |
         curl -LsSf https://astral.sh/uv/install.sh | sh
       args:
-        creates: "{{ ansible_env.HOME }}/.cargo/bin/uv"
+        creates: "/home/{{ target_user }}//.cargo/bin/uv"
 
     - name: Install Poetry
       shell: |
         curl -sSL https://install.python-poetry.org | python3 -
       args:
-        creates: "{{ ansible_env.HOME }}/.local/bin/poetry"
+        creates: "/home/{{ target_user }}//.local/bin/poetry"
 
     - name: Add Poetry to PATH
       blockinfile:
-        path: "{{ ansible_env.HOME }}/.bashrc"
+        path: "/home/{{ target_user }}//.bashrc"
         block: |
           export PATH="$HOME/.local/bin:$PATH"
         marker: "# {mark} ANSIBLE MANAGED BLOCK - poetry"
         create: true
-    - name: Install VSCode
-      command: |
-        rpm --import https://packages.microsoft.com/keys/microsoft.asc
-        echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\nautorefresh=1\ntype=rpm-md\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" | sudo tee /etc/yum.repos.d/vscode.repo > /dev/null
-        dnf check-update
-        dnf install code -y
-      
+
