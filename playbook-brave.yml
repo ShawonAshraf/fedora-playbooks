@@ -1,0 +1,10 @@
+---
+- hosts: all
+  become: true
+
+  tasks:
+    - name: Install Brave Browser
+      shell: |
+        curl -fsS https://dl.brave.com/install.sh | sh
+      args:
+        creates: /usr/bin/brave-browser
