@@ -23,6 +23,7 @@
       - org.torproject.torbrowser-launcher
       - org.zotero.Zotero
       - org.mozilla.Thunderbird
+      - net.davidotek.pupgui2
 
   tasks:
     - name: Add Flathub remote for user

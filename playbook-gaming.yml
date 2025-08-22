@@ -32,10 +32,4 @@
         name: gamemode
         state: present
 
-- hosts: all
-  become: false
-  tasks:
-    - name: Install Protonup-Qt
-      command: flatpak install flathub net.davidotek.pupgui2 -y
-
 
