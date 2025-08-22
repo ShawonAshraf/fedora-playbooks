@@ -17,17 +17,3 @@ Then run the playbooks.
 # will ask you for your password to become sudo
 ansible-playbook -i localhost, --connection=local -K playbook.yml
 ```
-
-## Debugging
-
-Use the `uv` env containing ansible and the `vagrant` configuration.
-
-```bash
-# setup uv
-uv sync
-source .venv/bin/activate
-
-# setup vagrant
-vagrant up
-vagrant provision
-```

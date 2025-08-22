@@ -67,14 +67,40 @@
         name: gh
         state: present
 
-    - name: Install VSCode
-      command: |
+    - name: Import Microsoft GPG key
+      shell: |
         rpm --import https://packages.microsoft.com/keys/microsoft.asc
-        echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\nautorefresh=1\ntype=rpm-md\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" | sudo tee /etc/yum.repos.d/vscode.repo > /dev/null
-        dnf install code -y
+      args:
+        creates: /tmp/microsoft-gpg-imported
+        
+    - name: Create marker file for GPG key import
+      file:
+        path: /tmp/microsoft-gpg-imported
+        state: touch
+      when: ansible_check_mode == false
+
+    - name: Add VSCode repository
+      yum_repository:
+        name: code
+        description: Visual Studio Code
+        baseurl: https://packages.microsoft.com/yumrepos/vscode
+        enabled: true
+        gpgcheck: true
+        gpgkey: https://packages.microsoft.com/keys/microsoft.asc
+        
+    - name: Install VScode
+      dnf:
+        name: code
+        state: present
+    - name: Install VScode
+      dnf:
+        name: code
+        state: present
 
 - hosts: all
   become: false
+  vars:
+    target_user: shawon
   tasks:
     - name: Install Rust and Cargo
       shell: |
