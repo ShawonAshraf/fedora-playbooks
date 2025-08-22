@@ -59,6 +59,11 @@
       dnf:
         name: podman-compose
         state: present
+    - name: Install gh cli
+      command: |
+        dnf install dnf5-plugins
+        dnf config-manager addrepo --from-repofile=https://cli.github.com/packages/rpm/gh-cli.repo
+        dnf install gh --repo gh-cli
 
 - hosts: all
   become: false
