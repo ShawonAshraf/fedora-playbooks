@@ -17,3 +17,5 @@ Then run the playbooks.
 # will ask you for your password to become sudo
 ansible-playbook -i localhost, --connection=local -K playbook.yml
 ```
+
+Currently the `target_user` variable inside the playbook is hardcoded, so you'll have to replace it with your username. 
