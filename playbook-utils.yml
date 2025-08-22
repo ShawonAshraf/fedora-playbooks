@@ -23,6 +23,11 @@
           - tuned-ppd
         state: absent
 
+    - name: Enable services for tlp
+      command: systemctl enable tlp.service
+    - name: Mask services conflicting with tlp
+      command: systemctl mask systemd-rfkill.service systemd-rfkill.socket
+
     - name: Install xclip
       dnf:
         name: xclip
@@ -52,11 +57,6 @@
       dnf:
         name: wget
         state: present
-
-    - name: Install OpenBangla Keyboard
-      shell: bash -c "$(wget -q https://raw.githubusercontent.com/OpenBangla/OpenBangla-Keyboard/master/tools/install.sh -O -)"
-      args:
-        warn: false
 
     - name: Install KDE Connect
       dnf:
