@@ -62,6 +62,12 @@
       dnf:
         name: kde-connect
         state: present
+    - name: Eable Fontmanager COPR repository
+      shell: dnf copr enable jerrycasiano/FontManager -y
+      register: copr_result
+      changed_when: "'Repository successfully enabled.' in copr_result.stdout"
     
-    
-        
+    - name: Install font-manager
+      dnf:
+        name: font-manager
+        state: present      
