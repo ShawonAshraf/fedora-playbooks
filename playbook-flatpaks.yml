@@ -63,4 +63,7 @@
     - name: Install Zotero
       command: flatpak install flathub org.zotero.Zotero -y
 
+    - name: Install Thunderbird
+      command: flatpak install flathub org.mozilla.Thunderbird -y
+
     
