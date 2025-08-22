@@ -1,69 +1,41 @@
 ---
 - hosts: all
-  become: false
+  become: true
+  become_user: "{{ target_user }}"
+  vars:
+    target_user: shawon
+    flatpaks:
+      - com.discordapp.Discord
+      - com.spotify.Client
+      - org.signal.Signal
+      - org.telegram.desktop
+      - com.github.tchx84.Flatseal
+      - com.obsproject.Studio
+      - md.obsidian.Obsidian
+      - com.mattjakeman.ExtensionManager
+      - org.gnome.World.PikaBackup
+      - org.filezillaproject.Filezilla
+      - io.podman_desktop.PodmanDesktop
+      - com.github.jeromerobert.pdfarranger
+      - de.haeckerfelix.Shortwave
+      - com.anydesk.Anydesk
+      - org.localsend.localsend_app
+      - org.torproject.torbrowser-launcher
+      - org.zotero.Zotero
+      - org.mozilla.Thunderbird
+
   tasks:
-    - name: Install flatpak
-      dnf:
-        name: flatpak
+    - name: Add Flathub remote for user
+      flatpak_remote:
+        name: flathub
         state: present
+        flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
+        method: user
 
-    - name: Enable Flathub remote
-      command: flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-      changed_when: false
-
-    - name: Install Discord
-      command: flatpak install -y flathub com.discordapp.Discord
-
-    - name: Install Spotify
-      command: flatpak install -y flathub com.spotify.Client
- 
-    - name: Install Signal
-      command: flatpak install -y flathub org.signal.Signal
-    
-    - name: Install Telegram
-      command: flatpak install -y flathub org.telegram.desktop
-
-  
-    - name: Install flatseal
-      command: flatpak install flathub com.github.tchx84.Flatseal -y
-
-    - name: Install OBS Studio
-      command: flatpak install flathub com.obsproject.Studio -y
-
-    - name: Install Obsidian
-      command: flatpak install flathub md.obsidian.Obsidian -y
-    
-    - name: Install Extension Manager
-      command: flatpak install flathub com.mattjakeman.ExtensionManager -y
-
-    - name: Install Pika Backup
-      command: flatpak install flathub org.gnome.World.PikaBackup -y
-
-    - name: Install Filezilla
-      command: flatpak install flathub org.filezillaproject.Filezilla -y
-
-    - name: Install Podman Desktop
-      command: flatpak install flathub io.podman_desktop.PodmanDesktop -y
-      
-    - name: Install PDF Arranger
-      command: flatpak install flathub com.github.jeromerobert.pdfarranger -y
-
-    - name: Install Shortwave
-      command: flatpak install flathub de.haeckerfelix.Shortwave -y
-
-    - name: Install Anydesk
-      command: flatpak install flathub com.anydesk.Anydesk -y
-
-    - name: Install Localsend
-      command: flatpak install flathub org.localsend.localsend_app -y
-
-    - name: Install Tor Browser
-      command: flatpak install flathub org.torproject.torbrowser-launcher -y
-      
-    - name: Install Zotero
-      command: flatpak install flathub org.zotero.Zotero -y
-
-    - name: Install Thunderbird
-      command: flatpak install flathub org.mozilla.Thunderbird -y
-
-    
+    - name: Install Flatpak applications for user
+      flatpak:
+        name: "{{ item }}"
+        state: present
+        remote: flathub
+        method: user
+      loop: "{{ flatpaks }}"
