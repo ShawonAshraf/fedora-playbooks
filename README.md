@@ -2,6 +2,26 @@
 
 Fedora post installation steps automated with ansible.
 
+## playbooks
+
+The repository ships a set of focused Ansible playbooks; use the table below to see each playbook's purpose.
+
+| playbook | function |
+|---|---|
+| `playbook.yml` | Top-level aggregator that imports and runs the other playbooks. |
+| `playbook-starter.yml` | Initial system setup: tweak dnf settings, update the system, and add RPM Fusion repositories and codec support. |
+| `playbook-nvidia.yml` | Installs NVIDIA drivers, CUDA-related runtime libraries from RPM Fusion, and GPU monitoring tools. |
+| `playbook-utils.yml` | Installs common utilities and tools (power management, system monitors, fetch utilities, font manager, clipboard/tree tools). |
+| `playbook-devtools.yml` | Installs development packages and tools, container runtimes (Docker), VS Code, Node/Rust/Python toolchains, and user-level developer utilities. |
+| `playbook-flatpaks.yml` | Adds the Flathub remote and installs a curated list of Flatpak applications for the target user. |
+| `playbook-media.yml` | Installs multimedia libraries and applications (multimedia group, VLC, MPV, HandBrake). |
+| `playbook-gaming.yml` | Installs gaming packages and overlays (Steam, Lutris, MangoHud, gamemode, etc.). |
+| `playbook-brave.yml` | Installs the Brave web browser via the Brave install script. |
+| `playbook-openbangla.yml` | Installs the OpenBangla keyboard using its install script. |
+
+> [!NOTE]
+> If you don't need specific playbooks you can comment them out in the `playbook.yml` file.
+
 ## Usage
 
 First install ansible via pip
@@ -22,8 +42,7 @@ Then run the playbooks.
 ansible-playbook -i localhost, --connection=local -K playbook.yml
 ```
 
-
-## What's not covered
+## what's not covered
 
 | Topic | Reason |
 |---|---|
@@ -31,7 +50,6 @@ ansible-playbook -i localhost, --connection=local -K playbook.yml
 | Secure Boot Setup | Secure Boot Setup. Check [RPMFusion/Howto/Secureboot](https://rpmfusion.org/Howto/Secure%20Boot). |
 | Gnome shell extensions | Gnome shell extensions. Use your own. |
 | VPNs and other email clients | VPNs and other email clients. Same as above. |
-
 
 > [!NOTE]
 > If you're using a new gen Thinkpad (e.g. P1 Gen 7 or newer), read [OMGLinux guide](https://www.omglinux.com/boot-linux-modern-lenovo-thinkpads-bios-setting/) on how to enable secure boot for non-Microsoft operating systems in the bios.
