@@ -92,16 +92,23 @@
       dnf:
         name: code
         state: present
-    - name: Install VScode
+    
+    - name: Install nodejs
       dnf:
-        name: code
+        name: nodejs
         state: present
+
+    - name: Install corepack
+      command: npm i -g corepack
 
 - hosts: all
   become: false
   vars:
     target_user: shawon
   tasks:
+    - name: Enable corepack
+      command: corepack enable
+      
     - name: Install Rust and Cargo
       shell: |
         curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
