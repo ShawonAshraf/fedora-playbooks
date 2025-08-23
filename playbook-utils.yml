@@ -58,10 +58,6 @@
         name: wget
         state: present
 
-    - name: Install KDE Connect
-      dnf:
-        name: kde-connect
-        state: present
     - name: Eable Fontmanager COPR repository
       shell: dnf copr enable jerrycasiano/FontManager -y
       register: copr_result
