@@ -7,5 +7,4 @@
 - import_playbook: playbook-media.yml
 - import_playbook: playbook-gaming.yml
 - import_playbook: playbook-brave.yml
-- import_playbook: playbook-cursor.yml
 - import_playbook: playbook-openbangla.yml
