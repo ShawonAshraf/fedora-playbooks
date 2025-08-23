@@ -25,6 +25,8 @@
       - org.mozilla.Thunderbird
       - net.davidotek.pupgui2
       - com.github.d4nj1.tlpui
+      - it.mijorus.gearlever
+      - io.github.pieterdd.RcloneShuttle
 
   tasks:
     - name: Add Flathub remote for user
