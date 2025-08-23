@@ -7,10 +7,11 @@
       dnf:
         name: akmod-nvidia
         state: present
-    - name: Setup CUDA Toolkit
-      shell: |
-       dnf config-manager addrepo --from-repofile=https://developer.download.nvidia.com/compute/cuda/repos/fedora41/$(uname -m)/cuda-fedora41.repo
-       dnf clean all
-       dnf module disable nvidia-driver
-       dnf config-manager setopt cuda-fedora41-$(uname -m).exclude=nvidia-driver,nvidia-modprobe,nvidia-persistenced,nvidia-settings,nvidia-libXNVCtrl,nvidia-xconfig
-       dnf -y install cuda-toolkit
+    - name: Install cuda libs from rpm-fusion
+      dnf:
+        name: xorg-x11-drv-nvidia-cuda-libs
+        state: present
+    - name: Install nvtop
+      dnf:
+        name: nvtop
+        state: present
