@@ -51,7 +51,7 @@ ansible-playbook -i localhost, --connection=local -K playbook.yml
 | Gnome shell extensions | Install based on your preferences. |
 | VPNs and other email clients | Same as above. |
 
-> [!TIP
+> [!TIP]
 > If you're using a new gen Thinkpad (e.g. P1 Gen 7 or newer), read the [OMGLinux guide](https://www.omglinux.com/boot-linux-modern-lenovo-thinkpads-bios-setting/) on how to enable secure boot for non-Microsoft operating systems in the bios.
 
 
