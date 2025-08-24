@@ -57,3 +57,19 @@ ansible-playbook -i localhost, --connection=local -K playbook.yml
 
 > [!TIP]
 > If you've a dual gpu laptop (iGPU+dGPU), use the following as the launcher command to run games on the dGPU: `%command% -graphicsadapter=0`
+
+
+
+
+## misc
+
+In Gnome 48 on fedora 42, two finger swipe in enabled in Chrome*, and Firefox. If you use Brave, you will have to edit the `.desktop` entry. 
+
+```bash
+sudo nano /usr/share/applications/brave-browser.desktop
+
+# add the following at the end of each Exec command
+--enable-features=TouchpadOverscrollHistoryNavigation 
+```
+
+
