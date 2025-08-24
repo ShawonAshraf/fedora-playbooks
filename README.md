@@ -33,7 +33,7 @@ pip install ansible
 
 Then run the playbooks.
 
-> [!NOTE]
+> [!IMPORTANT]
 > Currently the `target_user` variable inside the playbook is hardcoded, 
 > so you'll have to replace it with your username.
 
