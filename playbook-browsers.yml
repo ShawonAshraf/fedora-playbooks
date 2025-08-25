@@ -8,3 +8,7 @@
         curl -fsS https://dl.brave.com/install.sh | sh
       args:
         creates: /usr/bin/brave-browser
+    - name: Install Google Chrome
+      dnf:
+        name: google-chrome-stable
+        state: present
