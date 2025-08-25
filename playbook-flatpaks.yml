@@ -27,6 +27,9 @@
       - com.github.d4nj1.tlpui
       - it.mijorus.gearlever
       - io.github.pieterdd.RcloneShuttle
+      - com.github.iwalton3.jellyfin-media-player 
+      - io.github.wartybix.Constrict
+      - io.podman_desktop.PodmanDesktop
 
   tasks:
     - name: Add Flathub remote for user
