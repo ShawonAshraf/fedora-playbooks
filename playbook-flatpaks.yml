@@ -31,6 +31,16 @@
       - io.github.wartybix.Constrict
       - io.podman_desktop.PodmanDesktop
       - dev.geopjr.Calligraphy
+      - com.github.huluti.Curtail
+      - com.github.iwalton3.jellyfin-media-player
+      - com.github.jeromerobert.pdfarranger
+      - com.ulduzsoft.Birdtray
+      - dev.geopjr.Collision
+      - dev.qwery.AddWater
+      - io.github.getnf.embellish
+      - io.github.ronniedroid.concessio
+      - io.github.wartybix.Constrict
+      - io.gitlab.librewolf-community 
 
   tasks:
     - name: Add Flathub remote for user
