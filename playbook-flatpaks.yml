@@ -30,6 +30,7 @@
       - com.github.iwalton3.jellyfin-media-player 
       - io.github.wartybix.Constrict
       - io.podman_desktop.PodmanDesktop
+      - dev.geopjr.Calligraphy
 
   tasks:
     - name: Add Flathub remote for user

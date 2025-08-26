@@ -66,4 +66,9 @@
     - name: Install font-manager
       dnf:
         name: font-manager
-        state: present      
+        state: present   
+
+    - name: Install bottles
+      dnf:
+        name: bottles
+        state: present
