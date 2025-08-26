@@ -72,3 +72,8 @@
       dnf:
         name: bottles
         state: present
+
+    - name: Install btrfs-assistant
+      dnf:
+        name: btrfs-assistant
+        state: present
