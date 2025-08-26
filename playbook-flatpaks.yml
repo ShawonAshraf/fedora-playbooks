@@ -41,6 +41,8 @@
       - io.github.ronniedroid.concessio
       - io.github.wartybix.Constrict
       - io.gitlab.librewolf-community 
+      - io.github.tobagin.karere 
+      - io.github.tobagin.tempo
 
   tasks:
     - name: Add Flathub remote for user
