@@ -82,3 +82,7 @@
       dnf:
         name: gparted
         state: present
+    - name: Install wavemon
+      dnf:
+        name: wavemon
+        state: present
