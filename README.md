@@ -63,7 +63,10 @@ ansible-playbook -i localhost, --connection=local -K playbook.yml
 
 ## misc
 
-In Gnome 48 on fedora 42, two finger swipe in enabled in Chrome*, and Firefox. If you use Brave, you will have to edit the `.desktop` entry. 
+In Gnome 48 on fedora 42, two finger swipe is enabled in Chrome*, and Firefox. If you use Brave, you will have to edit the `.desktop` entry. 
+
+> [!NOTE]
+> Gestures work only in Wayland
 
 ```bash
 sudo nano /usr/share/applications/brave-browser.desktop
