@@ -86,3 +86,12 @@
       dnf:
         name: wavemon
         state: present
+
+    - name: Install handbrake
+      dnf:
+        name: handbrake
+        state: present
+    - name: Install handbrake-gui
+      dnf:
+        name: handbrake-gui
+        state: present
