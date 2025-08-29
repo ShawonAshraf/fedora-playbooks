@@ -63,6 +63,8 @@ ansible-playbook -i localhost, --connection=local -K playbook.yml
 
 ## misc
 
+### Trackpad Gestures
+
 In Gnome 48 on fedora 42, two finger swipe is enabled in Chrome*, and Firefox. If you use Brave, you will have to edit the `.desktop` entry. 
 
 > [!NOTE]
@@ -76,3 +78,31 @@ sudo nano /usr/share/applications/brave-browser.desktop
 ```
 
 
+### Disabling thinkpad trackpoint
+
+Perhaps considered heresy in the cult of the thinkpad but I saw no use for it in my workflow, especially with a haptic trackpad in place. 
+
+First get the trackpoint name from devices list:
+
+```bash
+cat /proc/bus/input/devices
+```
+
+On my P1G7 it's: `TPPS/2 Elan TrackPoint`
+
+
+```bash
+# create a udev rule
+sudo nano /etc/udev/rules.d/99-disable-trackpoint.rules
+
+# then add the following to the file
+ACTION=="add", SUBSYSTEM=="input", ATTRS{name}=="TPPS/2 Elan TrackPoint", RUN+="/bin/sh -c 'echo 1 > /sys$devpath/inhibited'"
+
+```
+
+Then activate the rule
+
+```bash
+sudo udevadm control --reload-rules
+sudo udevadm trigger
+```
