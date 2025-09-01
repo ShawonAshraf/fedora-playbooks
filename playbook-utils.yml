@@ -95,3 +95,10 @@
       dnf:
         name: handbrake-gui
         state: present
+
+    - name: Install Distrobox
+      dnf:
+        name: distrobox
+        state: present
+
+    
