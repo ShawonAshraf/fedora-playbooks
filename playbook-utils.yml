@@ -28,9 +28,9 @@
     - name: Mask services conflicting with tlp
       command: systemctl mask systemd-rfkill.service systemd-rfkill.socket
 
-    - name: Install xclip
+    - name: Install wl-clipboard
       dnf:
-        name: xclip
+        name: wl-clipboard
         state: present
     
     - name: Install tree
