@@ -41,8 +41,15 @@
       - io.github.ronniedroid.concessio
       - io.github.wartybix.Constrict
       - io.gitlab.librewolf-community 
-      - io.github.tobagin.karere 
-      - io.github.tobagin.tempo
+      - re.sonny.Eloquent
+      - org.wireshark.Wireshark
+      - org.ghidra_sre.Ghidra
+      - com.usebruno.Bruno
+      - dev.qwery.AddWater
+      - n.srev.guiscrcpy 
+      - io.dbeaver.DBeaverCommunity
+      - io.github.dvlv.boxbuddyrs 
+      - io.github.getnf.embellish
 
   tasks:
     - name: Add Flathub remote for user
