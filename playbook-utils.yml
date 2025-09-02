@@ -101,4 +101,12 @@
         name: distrobox
         state: present
 
-    
+    - name: Add Signal repository
+      command: dnf config-manager addrepo --from-repofile=https://download.opensuse.org/repositories/network:im:signal/Fedora_42/network:im:signal.repo
+      register: repo_result
+      changed_when: "'Repository successfully added.' in repo_result.stdout"
+
+    - name: Install Signal
+      dnf:
+        name: signal-desktop
+        state: present

@@ -7,7 +7,6 @@
     flatpaks:
       - com.discordapp.Discord
       - com.spotify.Client
-      - org.signal.Signal
       - org.telegram.desktop
       - com.github.tchx84.Flatseal
       - com.obsproject.Studio
