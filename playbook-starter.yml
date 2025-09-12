@@ -13,6 +13,7 @@
           fastestmirror=True
           max_parallel_downloads=20 
           defaultyes=True
+          installonly_limit=5
         marker: "# {mark} ANSIBLE MANAGED BLOCK"
     - name: Update system
       command: dnf update -y

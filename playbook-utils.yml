@@ -15,7 +15,6 @@
           - htop
           - btop
         state: present
-
     - name: Remove tuned to prevent conflicts with tlp
       dnf:
         name:
